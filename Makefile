@@ -27,6 +27,10 @@ SRC = $(shell find $(CWD) -maxdepth 1 -type f -regex .+.py$$)
 pep:
 	echo $(SRC) | xargs -n1 -P0 $(PEP) -i
 
+.PHONY: docs
+docs:
+	doxygen doxy.gen 1>/dev/null
+
 
 
 .PHONY: install update
@@ -74,7 +78,7 @@ static/bootstrap.js:
 
 .PHONY: master shadow release
 
-MERGE  = Makefile README.md .gitignore .vscode apt.txt requirements.txt
+MERGE  = Makefile README.md .gitignore .vscode apt.txt requirements.txt doxy.gen
 MERGE += $(MODULE).py $(MODULE).ini static templates
 
 master:
